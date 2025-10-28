@@ -35,6 +35,20 @@ namespace MohawkGame2D
             bool resetPressed = Input.IsKeyboardKeyPressed(KeyboardInput.Space);
             for (int i = 0; i < eyeballs.Length; i++)
             {
+                // protect against null references
+                if (eyeballs[i] == null)
+                {
+                    continue;
+                }
+
+                // right click to remove the eyeball
+                if (Input.IsMouseButtonPressed(MouseInput.Right) && eyeballs[i].IsMouseInside())
+                {
+                    // remove the eyeball
+                    eyeballs[i] = null;
+                    continue;
+                }
+
                 if (gameWon && resetPressed)
                 {
                     eyeballs[i].Setup();

@@ -30,12 +30,16 @@ namespace MohawkGame2D
             DrawEyeball();
         }
 
-        void ProcessInputs()
+        public bool IsMouseInside()
         {
             Vector2 eyeballPosToMousePos = Input.GetMousePosition() - position;
             bool insideCircle = eyeballPosToMousePos.Length() < radius;
+            return insideCircle;
+        }
 
-            if (insideCircle && Input.IsMouseButtonPressed(MouseInput.Left))
+        void ProcessInputs()
+        {
+            if (IsMouseInside() && Input.IsMouseButtonPressed(MouseInput.Left))
             {
                 closed = true;
             }
